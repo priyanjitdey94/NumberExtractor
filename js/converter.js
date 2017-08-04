@@ -146,7 +146,7 @@ Converter.prototype.textToNumber = function (_str) {
         tempNum = this.presentInOnePlace(textArray[i - 1]);
         if (tempNum > 0) {
           finalNum += tempNum * 100 * factor;
-          console.log(tempNum * 100 * factor);
+          //console.log(tempNum * 100 * factor);
           i -= 2;
         } else {
           finalNum += 100 * factor;
