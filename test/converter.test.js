@@ -1,6 +1,8 @@
 
 describe('Converter',function(){
 	it('should check convertToText',function(){
-		expect(Converter.prototype.convertToText(11)).toEqual(['Eleven']);
+		var conv=new Converter();
+		conv.setAttr(12);
+		expect(conv.numberToText(12)).toEqual('twelve');
 	});
 });
