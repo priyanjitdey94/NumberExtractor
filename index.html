@@ -4,12 +4,14 @@
 	<title>Converter</title>
 	<script type="text/javascript" src="./js/converter.js"></script>
 	<script type="text/javascript" src="./js/extractor.js"></script>
+	<link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
 </head>
 <body>
-Number to string converter: <input type="text" id="uInput1" name="userInput1"><button onclick="startN2S()">Submit</button>
-<p id="answer"></p>
-<br><br>
-String to number converter: <input type="text" id="uInput2" name="userInput2"><button onclick="startS2N()">Submit</button>
-<p id="answer2"></p>
+	<div id="container">
+		<textarea id="input1" class="textBox" placeholder="Enter your text here..."></textarea>
+		<button id="convertB" class="convert" onclick="startS2N()">CONVERT</button>
+		<textarea id="input2" class="textBox"></textarea>
+	</div>
+	<link rel="stylesheet" type="text/css" href="./css/style.css">
 </body>
 </html>

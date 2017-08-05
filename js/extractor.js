@@ -16,6 +16,15 @@ Extractor.prototype.setAttr=function(_str){
 	this.text=_str;
 }
 
+Extractor.prototype.initialize=function(){
+	this.text="";
+	this.convertedText="";
+	this.textArray=[];
+	this.points=[];
+	this.numberFound=[];
+	this.numberConverted=[];
+}
+
 Extractor.prototype.isPresent=function(str,mode){
 	var i,j,k;
 	if(str===""){
@@ -98,18 +107,18 @@ Extractor.prototype.replaceText=function(){
 		}
 	}
 	console.log(this.convertedText);
+	document.getElementById('input2').value=this.convertedText;
 }
 
 var extractor=new Extractor();
-extractor.setAttr("There are hundred people standing in a bus stop and only ten buses are running.");
-extractor.findNum();
-extractor.toNumber();
-extractor.replaceText();
 
 
 
 var startS2N = function () {
-  var _str = document.getElementById('uInput2').value;
-  converterObj.setAttr(0, _str.toLowerCase());
-  converterObj.textToNumber();
+	var _str = document.getElementById('input1').value;
+	extractor.initialize();
+	extractor.setAttr(_str);
+	extractor.findNum();
+	extractor.toNumber();
+	extractor.replaceText();
 };
