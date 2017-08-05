@@ -180,7 +180,7 @@ Converter.prototype.textToNumber = function (_str) {
     factor = tempNum;
   }
   // console.log(finalNum);
-  document.getElementById('answer2').innerHTML = finalNum;
+  // document.getElementById('answer2').innerHTML = finalNum;
   return finalNum;
 };
 
@@ -191,9 +191,4 @@ var startN2S = function () {
   var _num = document.getElementById('uInput1').value;
   converterObj.setAttr(parseInt(_num));
   converterObj.numberToText();
-};
-var startS2N = function () {
-  var _str = document.getElementById('uInput2').value;
-  converterObj.setAttr(0, _str.toLowerCase());
-  converterObj.textToNumber();
 };
