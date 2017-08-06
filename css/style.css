@@ -1,7 +1,7 @@
 html,body {
 	height: 100%;
 	margin: 0;
-	/*background-color: #e3e4e5;*/
+	background-color: #1f2021;
 }
 
 #container {
@@ -12,7 +12,7 @@ html,body {
 	position: relative;
 	border-radius: 2vw;
 	background-color: #6195e8;
-	box-shadow: 0 0 2vw #6195e8;
+	box-shadow: 0 0 3vw #6195e8;
 	overflow: auto;
 }
 
@@ -43,7 +43,7 @@ button::-moz-focus-inner {
 	position: absolute;
 	background-color: red;
 	top: 36vh;
-	left:40.75vw;
+	left:40.95vw;
 	border-radius: 8vw;
 	border:1vw solid #595c60;
 	font-size: 1vw;

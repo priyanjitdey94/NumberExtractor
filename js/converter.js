@@ -6,6 +6,12 @@ var Converter = function () {
   this.tenPlace = ['', '', 'twenty', 'thirty', 'forty', 'fifty', 'sixty', 'seventy', 'eighty', 'ninety'];
   this.oneInTenPlace = ['ten', 'eleven', 'twelve', 'thirteen', 'fourteen', 'fifteen', 'sixteen', 'seventeen', 'eighteen', 'nineteen'];
   this.mileStone = ['', 'thousand', 'million', 'billion', 'hundred'];
+  this.cOnePlace=['','first','second','third','fourth','fifth','sixth','seventh','eigth','ninth'];
+  this.cOneInTenPlace=['tenth','eleventh','twelveth','thirteenth','fourteenth','fifteenth','sixteenth',
+        'seventeenth','eighteenth','nineteenth'];
+  this.cTenPlace=['','','twentieth','thirteeth','fortieth','fiftieth','sixtieth','seventieth',
+        'eightieth','ninetieth'];
+  this.cMileStone=['','thousandth','milllionth','billionth','hundredth'];
 };
 
 Converter.prototype.setAttr = function (_num, _numText) {
@@ -16,6 +22,32 @@ Converter.prototype.setAttr = function (_num, _numText) {
     this.numText = _numText;
   }
 };
+
+Converter.prototype.checkForCardinal=function(str){
+  var i,j,k;
+  for(i=0;i<this.cOnePlace.length;i++){
+    if(str===this.cOnePlace[i]){
+      return this.onePlace[i];
+    }
+  }
+  for(i=0;i<this.cTenPlace.length;i++){
+    if(str===this.cTenPlace[i]){
+      return this.tenPlace[i];
+    }
+  }
+  for(i=0;i<this.cOneInTenPlace.length;i++){
+    if(str===this.cOneInTenPlace[i]){
+      return this.oneInTenPlace[i];
+    }
+  }
+  for(i=0;i<this.cMileStone.length;i++){
+    if(str===this.cMileStone[i]){
+      return this.mileStone[i];
+    }
+  }
+  return str;
+}
+
 
 Converter.prototype.toHundredPlace = function (x, y, z) {
   var str = '';
@@ -72,6 +104,7 @@ Converter.prototype.numberToText = function (_num) {
   document.getElementById('answer').innerHTML = finalStr;
   return finalStr.trim();
 };
+
 
 Converter.prototype.presentInOnePlace = function (str) {
   var i,
@@ -184,11 +217,3 @@ Converter.prototype.textToNumber = function (_str) {
   return finalNum;
 };
 
-var converterObj = new Converter();
-converterObj.setAttr(0, '');
-
-var startN2S = function () {
-  var _num = document.getElementById('uInput1').value;
-  converterObj.setAttr(parseInt(_num));
-  converterObj.numberToText();
-};
