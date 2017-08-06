@@ -1,0 +1,692 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <title>Code coverage report for js/extractor.js</title>
+    <meta charset="utf-8" />
+    <link rel="stylesheet" href="../prettify.css" />
+    <link rel="stylesheet" href="../base.css" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <style type='text/css'>
+        .coverage-summary .sorter {
+            background-image: url(../sort-arrow-sprite.png);
+        }
+    </style>
+</head>
+<body>
+<div class='wrapper'>
+  <div class='pad1'>
+    <h1>
+      <a href="../index.html">all files</a> / <a href="index.html">js/</a> extractor.js
+    </h1>
+    <div class='clearfix'>
+      <div class='fl pad1y space-right2'>
+        <span class="strong">99.32% </span>
+        <span class="quiet">Statements</span>
+        <span class='fraction'>146/147</span>
+      </div>
+      <div class='fl pad1y space-right2'>
+        <span class="strong">98.33% </span>
+        <span class="quiet">Branches</span>
+        <span class='fraction'>59/60</span>
+      </div>
+      <div class='fl pad1y space-right2'>
+        <span class="strong">100% </span>
+        <span class="quiet">Functions</span>
+        <span class='fraction'>11/11</span>
+      </div>
+      <div class='fl pad1y space-right2'>
+        <span class="strong">99.3% </span>
+        <span class="quiet">Lines</span>
+        <span class='fraction'>141/142</span>
+      </div>
+    </div>
+  </div>
+  <div class='status-line high'></div>
+<pre><table class="coverage">
+<tr><td class="line-count quiet">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+29
+30
+31
+32
+33
+34
+35
+36
+37
+38
+39
+40
+41
+42
+43
+44
+45
+46
+47
+48
+49
+50
+51
+52
+53
+54
+55
+56
+57
+58
+59
+60
+61
+62
+63
+64
+65
+66
+67
+68
+69
+70
+71
+72
+73
+74
+75
+76
+77
+78
+79
+80
+81
+82
+83
+84
+85
+86
+87
+88
+89
+90
+91
+92
+93
+94
+95
+96
+97
+98
+99
+100
+101
+102
+103
+104
+105
+106
+107
+108
+109
+110
+111
+112
+113
+114
+115
+116
+117
+118
+119
+120
+121
+122
+123
+124
+125
+126
+127
+128
+129
+130
+131
+132
+133
+134
+135
+136
+137
+138
+139
+140
+141
+142
+143
+144
+145
+146
+147
+148
+149
+150
+151
+152
+153
+154
+155
+156
+157
+158
+159
+160
+161
+162
+163
+164
+165
+166
+167
+168
+169
+170
+171
+172
+173
+174
+175
+176
+177
+178
+179
+180
+181
+182
+183
+184
+185
+186
+187
+188
+189
+190
+191
+192
+193
+194
+195
+196
+197
+198
+199
+200
+201
+202
+203
+204
+205
+206
+207
+208
+209
+210</td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">5×</span>
+<span class="cline-any cline-yes">5×</span>
+<span class="cline-any cline-yes">5×</span>
+<span class="cline-any cline-yes">5×</span>
+<span class="cline-any cline-yes">5×</span>
+<span class="cline-any cline-yes">5×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">20×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">16×</span>
+<span class="cline-any cline-yes">16×</span>
+<span class="cline-any cline-yes">16×</span>
+<span class="cline-any cline-yes">16×</span>
+<span class="cline-any cline-yes">16×</span>
+<span class="cline-any cline-yes">16×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">19×</span>
+<span class="cline-any cline-yes">2×</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">18×</span>
+<span class="cline-any cline-yes">18×</span>
+<span class="cline-any cline-yes">18×</span>
+<span class="cline-any cline-yes">18×</span>
+<span class="cline-any cline-yes">18×</span>
+<span class="cline-any cline-yes">125×</span>
+<span class="cline-any cline-yes">8×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">117×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">18×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">138×</span>
+<span class="cline-any cline-yes">138×</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">137×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">137×</span>
+<span class="cline-any cline-yes">1254×</span>
+<span class="cline-any cline-yes">21×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">116×</span>
+<span class="cline-any cline-yes">1095×</span>
+<span class="cline-any cline-yes">13×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">103×</span>
+<span class="cline-any cline-yes">1006×</span>
+<span class="cline-any cline-yes">3×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">100×</span>
+<span class="cline-any cline-yes">494×</span>
+<span class="cline-any cline-yes">3×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">97×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">17×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">17×</span>
+<span class="cline-any cline-yes">17×</span>
+<span class="cline-any cline-yes">98×</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">98×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">98×</span>
+<span class="cline-any cline-yes">17×</span>
+<span class="cline-any cline-yes">17×</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">17×</span>
+<span class="cline-any cline-yes">28×</span>
+<span class="cline-any cline-yes">28×</span>
+<span class="cline-any cline-yes">13×</span>
+<span class="cline-any cline-yes">13×</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">13×</span>
+<span class="cline-any cline-yes">15×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">4×</span>
+<span class="cline-any cline-yes">4×</span>
+<span class="cline-any cline-yes">2×</span>
+<span class="cline-any cline-yes">2×</span>
+<span class="cline-any cline-yes">2×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">2×</span>
+<span class="cline-any cline-yes">2×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">4×</span>
+<span class="cline-any cline-yes">4×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">11×</span>
+<span class="cline-any cline-yes">11×</span>
+<span class="cline-any cline-yes">11×</span>
+<span class="cline-any cline-yes">11×</span>
+<span class="cline-any cline-yes">11×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">81×</span>
+<span class="cline-any cline-yes">6×</span>
+<span class="cline-any cline-yes">6×</span>
+<span class="cline-any cline-yes">6×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">17×</span>
+<span class="cline-any cline-yes">25×</span>
+<span class="cline-any cline-yes">25×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">40×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">25×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">17×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">9×</span>
+<span class="cline-any cline-yes">9×</span>
+<span class="cline-any cline-yes">16×</span>
+<span class="cline-any cline-yes">16×</span>
+<span class="cline-any cline-yes">16×</span>
+<span class="cline-any cline-yes">25×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">16×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">9×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">7×</span>
+<span class="cline-any cline-yes">7×</span>
+<span class="cline-any cline-yes">2×</span>
+<span class="cline-any cline-yes">5×</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">4×</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">3×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">9×</span>
+<span class="cline-any cline-yes">9×</span>
+<span class="cline-any cline-yes">9×</span>
+<span class="cline-any cline-yes">9×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">9×</span>
+<span class="cline-any cline-yes">76×</span>
+<span class="cline-any cline-yes">16×</span>
+<span class="cline-any cline-yes">7×</span>
+<span class="cline-any cline-yes">7×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">9×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">16×</span>
+<span class="cline-any cline-yes">16×</span>
+<span class="cline-any cline-yes">16×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">60×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">9×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">&nbsp;
+var converterObj = new Converter();
+converterObj.setAttr(0, '');
+&nbsp;
+var Extractor = function () {
+  this.text = '';
+  this.convertedText = '';
+  this.textArray = [];
+  this.points = [];
+  this.numberFound = [];
+  this.numberConverted = [];
+};
+&nbsp;
+Extractor.prototype.setAttr = function (_str) {
+  this.text = _str;
+};
+&nbsp;
+Extractor.prototype.initialize = function () {
+  this.text = '';
+  this.convertedText = '';
+  this.textArray = [];
+  this.points = [];
+  this.numberFound = [];
+  this.numberConverted = [];
+};
+&nbsp;
+Extractor.prototype.cleanText = function (_str) {
+  if (_str !== undefined) {
+    if (typeof _str !== 'string') {
+      return 'illegal arguement';
+    }
+    this.text = _str;
+  }
+  this.text = this.text.replace(/(\n\r|\n|\r)/gm, ' ');
+  this.text = this.text.replace(/\t+/g, '');
+  var str = this.text.split(' ');
+  this.textArray = [];
+  for (var i = 0; i &lt; str.length; i++) {
+    if (str[i] === '' || str[i] === ' ') {
+      continue;
+    }
+    this.textArray.push(str[i]);
+  }
+  return this.textArray;
+};
+&nbsp;
+Extractor.prototype.isPresent = function (str, mode) {
+  var i;
+  if (str === '') {
+    return false;
+  }
+  str = str.toLowerCase();
+  // console.log(str);
+  for (i = 0; i &lt; converterObj.onePlace.length; i++) {
+    if (str === converterObj.onePlace[i] || str === converterObj.cOnePlace[i]) {
+      return true;
+    }
+  }
+  for (i = 0; i &lt; converterObj.tenPlace.length; i++) {
+    if (str === converterObj.tenPlace[i] || str === converterObj.cTenPlace[i]) {
+      return true;
+    }
+  }
+  for (i = 0; i &lt; converterObj.oneInTenPlace.length; i++) {
+    if (str === converterObj.oneInTenPlace[i] || str === converterObj.cOneInTenPlace[i]) {
+      return true;
+    }
+  }
+  for (i = 0; i &lt; converterObj.mileStone.length; i++) {
+    if (str === converterObj.mileStone[i] || str === converterObj.cMileStone[i]) {
+      return true;
+    }
+  }
+  return false;
+};
+&nbsp;
+Extractor.prototype.findNum = function () {
+  this.textArray = this.cleanText();
+  // console.log(this.textArray);
+  var i, j, str;
+  for (i = 0; i &lt; this.textArray.length; i++) {
+    <span class="missing-if-branch" title="if path not taken" >I</span>if (this.textArray[i] === '') {
+<span class="cstat-no" title="statement not covered" >      continue;</span>
+    }
+    str = converterObj.checkForCardinal(this.textArray[i]);
+    // console.log(str+' '+this.textArray[i]);
+    if (str === this.textArray[i] &amp;&amp; this.isPresent(this.textArray[i])) {
+      j = i + 1;
+      if (j === this.textArray.length) {
+        this.points.push(i);
+        this.points.push(i);
+        this.points.push(0);
+      }
+      while (j &lt; this.textArray.length) {
+        str = converterObj.checkForCardinal(this.textArray[j]);
+        if (str === this.textArray[j] &amp;&amp; this.isPresent(str)) {
+          j++;
+          if (j === this.textArray.length) {
+            this.points.push(i);
+            this.points.push(j - 1);
+            this.points.push(0);
+            i = j;
+          }
+          continue;
+        } else if (this.isPresent(str)) {
+          // console.log('here');
+          str = this.textArray[j - 1];
+          if (converterObj.presentInOnePlace(str) === -1 &amp;&amp; str !== 'ten') {
+            this.points.push(i);
+            this.points.push(j);
+            this.points.push(1);
+          } else {
+            this.points.push(i); this.points.push(j - 1); this.points.push(0);
+            this.points.push(j); this.points.push(j); this.points.push(1);
+          }
+          i = j;
+          break;
+        } else {
+          this.points.push(i);
+          this.points.push(j - 1);
+          this.points.push(0);
+          i = j - 1;
+          break;
+        }
+      }
+    } else if (str !== this.textArray[i] &amp;&amp; this.isPresent(this.textArray[i])) {
+      this.points.push(i);
+      this.points.push(i);
+      this.points.push(1);
+    }
+  }
+  // console.log(this.points);
+  for (i = 0; i &lt; this.points.length; i += 3) {
+    var temp = '';
+    for (j = this.points[i]; j &lt;= this.points[i + 1]; j++) {
+      // console.log(this.textArray[j]);
+      temp += this.textArray[j] + ' ';
+    }
+    this.numberFound.push(temp);
+  }
+  // console.log(this.numberFound);
+  return this.numberFound;
+};
+&nbsp;
+Extractor.prototype.toNumber = function () {
+  var i, j;
+  for (i = 0; i &lt; this.points.length; i += 3) {
+    var temp = '';
+    this.textArray[this.points[i + 1]] = converterObj.checkForCardinal(this.textArray[this.points[i + 1]]);
+    for (j = this.points[i]; j &lt;= this.points[i + 1]; j++) {
+      temp += this.textArray[j] + ' ';
+    }
+    this.numberConverted.push(converterObj.textToNumber(temp.trim()));
+  }
+  // console.log(this.numberConverted);
+  return this.numberConverted;
+};
+&nbsp;
+Extractor.prototype.getOrdinalSuffix = function (num) {
+  var lsn = num % 10;
+  if (lsn === 1) {
+    return 'st';
+  } else if (lsn === 2) {
+    return 'nd';
+  } else if (lsn === 3) {
+    return 'rd';
+  } else return 'th';
+};
+&nbsp;
+Extractor.prototype.replaceText = function () {
+  var i, j, k;
+  j = 0;
+  k = 0;
+  this.convertedText = '';
+  // console.log(this.points);
+  for (i = 0; i &lt; this.textArray.length;) {
+    if (i === this.points[j]) {
+      if (this.points[j + 2] === 1) {
+        var suffix = this.getOrdinalSuffix(this.numberConverted[k]);
+        this.convertedText += (this.numberConverted[k] + suffix + ' ');
+      } else {
+        this.convertedText += (this.numberConverted[k] + ' ');
+      }
+      k++;
+      j += 3;
+      i = this.points[j - 2] + 1;
+    } else {
+      this.convertedText += (this.textArray[i] + ' '); i++;
+    }
+  }
+  // console.log(this.convertedText);
+  document.getElementById('input2').value = this.convertedText;
+};
+&nbsp;
+var extractor = new Extractor();
+&nbsp;
+// Adding methods to globals classes
+Object.prototype.print = function () {
+  console.log(this.valueOf());
+};
+&nbsp;
+window.startS2N = function () {
+  var _str = document.getElementById('input1').value;
+  extractor.initialize();
+  extractor.setAttr(_str);
+  extractor.findNum();
+  extractor.toNumber();
+  extractor.replaceText();
+};
+&nbsp;</pre></td></tr>
+</table></pre>
+<div class='push'></div><!-- for sticky footer -->
+</div><!-- /wrapper -->
+<div class='footer quiet pad2 space-top1 center small'>
+  Code coverage
+  generated by <a href="http://istanbul-js.org/" target="_blank">istanbul</a> at Mon Aug 07 2017 01:00:17 GMT+0530 (IST)
+</div>
+</div>
+<script src="../prettify.js"></script>
+<script>
+window.onload = function () {
+        if (typeof prettyPrint === 'function') {
+            prettyPrint();
+        }
+};
+</script>
+<script src="../sorter.js"></script>
+</body>
+</html>

@@ -11,7 +11,7 @@ var Converter = function () {
         'seventeenth','eighteenth','nineteenth'];
   this.cTenPlace=['','','twentieth','thirteeth','fortieth','fiftieth','sixtieth','seventieth',
         'eightieth','ninetieth'];
-  this.cMileStone=['','thousandth','milllionth','billionth','hundredth'];
+  this.cMileStone=['','thousandth','millionth','billionth','hundredth'];
 };
 
 Converter.prototype.setAttr = function (_num, _numText) {
@@ -48,6 +48,29 @@ Converter.prototype.checkForCardinal=function(str){
   return str;
 }
 
+Converter.prototype.checkForOrdinal=function(str){
+  var i,j,k;
+  for(i=0;i<this.onePlace.length;i++){
+    if(str===this.onePlace[i]){
+      return this.cOnePlace[i];
+    }
+  }
+  for(i=0;i<this.tenPlace.length;i++){
+    if(str===this.tenPlace[i]){
+      return this.cTenPlace[i];
+    }
+  }
+  for(i=0;i<this.oneInTenPlace.length;i++){
+    if(str===this.oneInTenPlace[i]){
+      return this.cOneInTenPlace[i];
+    }
+  }
+  for(i=0;i<this.mileStone.length;i++){
+    if(str===this.mileStone[i]){
+      return this.cMileStone[i];
+    }
+  }
+}
 
 Converter.prototype.toHundredPlace = function (x, y, z) {
   var str = '';
@@ -101,7 +124,7 @@ Converter.prototype.numberToText = function (_num) {
   for (i = str.length - 1; i >= 0; i--) {
     finalStr += str[i] + ' ';
   }
-  document.getElementById('answer').innerHTML = finalStr;
+  //document.getElementById('answer').innerHTML = finalStr;
   return finalStr.trim();
 };
 
@@ -216,4 +239,24 @@ Converter.prototype.textToNumber = function (_str) {
   // document.getElementById('answer2').innerHTML = finalNum;
   return finalNum;
 };
+
+Converter.prototype.ordinalToCardinal=function(_str){
+  var str=_str.slice(0,_str.length-2),num;
+  if(isNaN(parseInt(str)) || str.match(/[a-zA-z]/i)){
+    return 'Illegal arguement';
+  }else{
+    num=parseInt(str);
+  }
+  var text=this.numberToText(num);
+  convertedString=text.split(' ');
+  var lastWord=convertedString.pop();
+  lastWord=this.checkForOrdinal(lastWord);
+  convertedString.push(lastWord);
+  var temp="";
+  for(var i=0;i<convertedString.length;i++){
+    temp+=convertedString[i]+' ';
+  }
+  temp=temp.trim();
+  return(temp);
+}
 
