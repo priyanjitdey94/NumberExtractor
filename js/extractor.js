@@ -146,10 +146,12 @@ Extractor.prototype.toNumber = function () {
   var i, j;
   for (i = 0; i < this.points.length; i += 3) {
     var temp = '';
+    
     this.textArray[this.points[i + 1]] = converterObj.checkForCardinal(this.textArray[this.points[i + 1]]);
     for (j = this.points[i]; j <= this.points[i + 1]; j++) {
       temp += this.textArray[j] + ' ';
     }
+    temp=temp.toLowerCase();
     this.numberConverted.push(converterObj.textToNumber(temp.trim()));
   }
   // console.log(this.numberConverted);
