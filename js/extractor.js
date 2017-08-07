@@ -1,8 +1,9 @@
-// import Converter from './converter.js';
+import Converter from './converter.js';
 
 var converterObj = new Converter();
 converterObj.setAttr(0, '');
 
+//Class to handle all the processing of text.
 var Extractor = function () {
   this.text = '';
   this.convertedText = '';
@@ -12,10 +13,12 @@ var Extractor = function () {
   this.numberConverted = [];
 };
 
+//Set attribute of this.text.
 Extractor.prototype.setAttr = function (_str) {
   this.text = _str;
 };
 
+//Initialize everything
 Extractor.prototype.initialize = function () {
   this.text = '';
   this.convertedText = '';
@@ -25,6 +28,7 @@ Extractor.prototype.initialize = function () {
   this.numberConverted = [];
 };
 
+//Remove any newline space and tabs
 Extractor.prototype.cleanText = function (_str) {
   if (_str !== undefined) {
     if (typeof _str !== 'string') {
@@ -45,6 +49,8 @@ Extractor.prototype.cleanText = function (_str) {
   return this.textArray;
 };
 
+
+//Check if str is a number
 Extractor.prototype.isPresent = function (str, mode) {
   var i;
   if (str === '') {
@@ -75,6 +81,7 @@ Extractor.prototype.isPresent = function (str, mode) {
   return false;
 };
 
+//check if str is number
 Extractor.prototype.isNum=function(str){
   var i,j;
   for(i=0;i<str.length;i++){
@@ -85,6 +92,7 @@ Extractor.prototype.isNum=function(str){
   return true;
 }
 
+//check if str is ordinal
 Extractor.prototype.isOrdinal=function(str){
   var i,j,temp='';
   temp=str.charAt(str.length-2)+str.charAt(str.length-1);
@@ -93,7 +101,7 @@ Extractor.prototype.isOrdinal=function(str){
   }
   for(i=0;i<str.length-2;i++){
     if(isNaN(parseInt(str[i]))){
-      console.log(parseInt(str[i]));
+      // console.log(parseInt(str[i]));
       return false;
     }
   }
@@ -191,6 +199,7 @@ Extractor.prototype.findNum = function () {
   return this.numberFound;
 };
 
+//Conversion taking place here
 Extractor.prototype.toNumber = function () {
   var i, j;
   // console.log(this.points);
@@ -245,6 +254,7 @@ Extractor.prototype.toNumber = function () {
   return this.numberConverted;
 };
 
+//Find accurate suffix for ordinal and cardinal number
 Extractor.prototype.getOrdinalSuffix = function (num) {
   var i,j,k;
   if(typeof num === 'number'){
@@ -271,6 +281,7 @@ Extractor.prototype.getOrdinalSuffix = function (num) {
   
 };
 
+//Replace in original text
 Extractor.prototype.replaceText = function () {
   var i, j, k;
   j = 0;

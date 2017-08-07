@@ -1,4 +1,5 @@
 
+//Class that carries out all the conversion work
 var Converter = function () {
   this.num = 0;
   this.numText = '';
@@ -14,6 +15,7 @@ var Converter = function () {
   this.cMileStone = ['', 'thousandth', 'millionth', 'billionth', 'hundredth'];
 };
 
+//class to set this.num and this.numText
 Converter.prototype.setAttr = function (_num, _numText) {
   if (_num !== undefined) {
     this.num = _num;
@@ -23,6 +25,7 @@ Converter.prototype.setAttr = function (_num, _numText) {
   }
 };
 
+//Check if str is cardinal
 Converter.prototype.checkForCardinal = function (str) {
   var i, j, k;
   for (i = 0; i < this.cOnePlace.length; i++) {
@@ -48,6 +51,7 @@ Converter.prototype.checkForCardinal = function (str) {
   return str;
 };
 
+//check if str is ordinal
 Converter.prototype.checkForOrdinal = function (str) {
   var i, j, k;
   for (i = 0; i < this.onePlace.length; i++) {
@@ -90,6 +94,7 @@ Converter.prototype.toHundredPlace = function (x, y, z) {
   return str;
 };
 
+//convert number to text
 Converter.prototype.numberToText = function (_num) {
   if (_num !== undefined) {
     this.num = _num;
@@ -103,7 +108,9 @@ Converter.prototype.numberToText = function (_num) {
   }
   var temp = this.num,
     numArray = [],
-    i;
+    i,
+    j,
+    k;
 
   while (temp > 0) {
     numArray.push(temp % 10);
@@ -177,6 +184,8 @@ Converter.prototype.presentInMilestone = function (str) {
   } else return 1;
 };
 
+
+//Convert text to number
 Converter.prototype.textToNumber = function (_str) {
   if (_str !== undefined) {
     this.numText = _str;
@@ -242,6 +251,7 @@ Converter.prototype.textToNumber = function (_str) {
   return finalNum;
 };
 
+//convert ordinal to cardinal
 Converter.prototype.ordinalToCardinal = function (_str) {
   var str = _str.slice(0, _str.length - 2), num;
   console.log(_str+"j");
@@ -251,7 +261,7 @@ Converter.prototype.ordinalToCardinal = function (_str) {
     num = parseInt(str);
   }
   var text = this.numberToText(num);
-  convertedString = text.split(' ');
+  var convertedString = text.split(' ');
   var lastWord = convertedString.pop();
   lastWord = this.checkForOrdinal(lastWord);
   convertedString.push(lastWord);
@@ -263,4 +273,4 @@ Converter.prototype.ordinalToCardinal = function (_str) {
   return (temp);
 };
 
-// export default Converter;
+export default Converter;
