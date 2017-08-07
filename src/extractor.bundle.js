@@ -72,6 +72,7 @@
 
 "use strict";
 
+//Class that carries out all the conversion work
 var Converter = function () {
   this.num = 0;
   this.numText = '';
@@ -79,14 +80,15 @@ var Converter = function () {
   this.tenPlace = ['', '', 'twenty', 'thirty', 'forty', 'fifty', 'sixty', 'seventy', 'eighty', 'ninety'];
   this.oneInTenPlace = ['ten', 'eleven', 'twelve', 'thirteen', 'fourteen', 'fifteen', 'sixteen', 'seventeen', 'eighteen', 'nineteen'];
   this.mileStone = ['', 'thousand', 'million', 'billion', 'hundred'];
-  this.cOnePlace=['','first','second','third','fourth','fifth','sixth','seventh','eigth','ninth'];
-  this.cOneInTenPlace=['tenth','eleventh','twelveth','thirteenth','fourteenth','fifteenth','sixteenth',
-        'seventeenth','eighteenth','nineteenth'];
-  this.cTenPlace=['','','twentieth','thirteeth','fortieth','fiftieth','sixtieth','seventieth',
-        'eightieth','ninetieth'];
-  this.cMileStone=['','thousandth','millionth','billionth','hundredth'];
+  this.cOnePlace = ['', 'first', 'second', 'third', 'fourth', 'fifth', 'sixth', 'seventh', 'eigth', 'ninth'];
+  this.cOneInTenPlace = ['tenth', 'eleventh', 'twelveth', 'thirteenth', 'fourteenth', 'fifteenth', 'sixteenth',
+    'seventeenth', 'eighteenth', 'nineteenth'];
+  this.cTenPlace = ['', '', 'twentieth', 'thirteeth', 'fortieth', 'fiftieth', 'sixtieth', 'seventieth',
+    'eightieth', 'ninetieth'];
+  this.cMileStone = ['', 'thousandth', 'millionth', 'billionth', 'hundredth'];
 };
 
+//class to set this.num and this.numText
 Converter.prototype.setAttr = function (_num, _numText) {
   if (_num !== undefined) {
     this.num = _num;
@@ -96,54 +98,56 @@ Converter.prototype.setAttr = function (_num, _numText) {
   }
 };
 
-Converter.prototype.checkForCardinal=function(str){
-  var i,j,k;
-  for(i=0;i<this.cOnePlace.length;i++){
-    if(str===this.cOnePlace[i]){
+//Check if str is cardinal
+Converter.prototype.checkForCardinal = function (str) {
+  var i, j, k;
+  for (i = 0; i < this.cOnePlace.length; i++) {
+    if (str === this.cOnePlace[i]) {
       return this.onePlace[i];
     }
   }
-  for(i=0;i<this.cTenPlace.length;i++){
-    if(str===this.cTenPlace[i]){
+  for (i = 0; i < this.cTenPlace.length; i++) {
+    if (str === this.cTenPlace[i]) {
       return this.tenPlace[i];
     }
   }
-  for(i=0;i<this.cOneInTenPlace.length;i++){
-    if(str===this.cOneInTenPlace[i]){
+  for (i = 0; i < this.cOneInTenPlace.length; i++) {
+    if (str === this.cOneInTenPlace[i]) {
       return this.oneInTenPlace[i];
     }
   }
-  for(i=0;i<this.cMileStone.length;i++){
-    if(str===this.cMileStone[i]){
+  for (i = 0; i < this.cMileStone.length; i++) {
+    if (str === this.cMileStone[i]) {
       return this.mileStone[i];
     }
   }
   return str;
-}
+};
 
-Converter.prototype.checkForOrdinal=function(str){
-  var i,j,k;
-  for(i=0;i<this.onePlace.length;i++){
-    if(str===this.onePlace[i]){
+//check if str is ordinal
+Converter.prototype.checkForOrdinal = function (str) {
+  var i, j, k;
+  for (i = 0; i < this.onePlace.length; i++) {
+    if (str === this.onePlace[i]) {
       return this.cOnePlace[i];
     }
   }
-  for(i=0;i<this.tenPlace.length;i++){
-    if(str===this.tenPlace[i]){
+  for (i = 0; i < this.tenPlace.length; i++) {
+    if (str === this.tenPlace[i]) {
       return this.cTenPlace[i];
     }
   }
-  for(i=0;i<this.oneInTenPlace.length;i++){
-    if(str===this.oneInTenPlace[i]){
+  for (i = 0; i < this.oneInTenPlace.length; i++) {
+    if (str === this.oneInTenPlace[i]) {
       return this.cOneInTenPlace[i];
     }
   }
-  for(i=0;i<this.mileStone.length;i++){
-    if(str===this.mileStone[i]){
+  for (i = 0; i < this.mileStone.length; i++) {
+    if (str === this.mileStone[i]) {
       return this.cMileStone[i];
     }
   }
-}
+};
 
 Converter.prototype.toHundredPlace = function (x, y, z) {
   var str = '';
@@ -163,6 +167,7 @@ Converter.prototype.toHundredPlace = function (x, y, z) {
   return str;
 };
 
+//convert number to text
 Converter.prototype.numberToText = function (_num) {
   if (_num !== undefined) {
     this.num = _num;
@@ -171,9 +176,14 @@ Converter.prototype.numberToText = function (_num) {
   // if(this.num===NaN || typeof this.num=='number'){
   //    return "Incorrect arguement";
   // }
+  if(this.num===0){
+    return 'zero';
+  }
   var temp = this.num,
     numArray = [],
-    i;
+    i,
+    j,
+    k;
 
   while (temp > 0) {
     numArray.push(temp % 10);
@@ -197,10 +207,9 @@ Converter.prototype.numberToText = function (_num) {
   for (i = str.length - 1; i >= 0; i--) {
     finalStr += str[i] + ' ';
   }
-  //document.getElementById('answer').innerHTML = finalStr;
+  // document.getElementById('answer').innerHTML = finalStr;
   return finalStr.trim();
 };
-
 
 Converter.prototype.presentInOnePlace = function (str) {
   var i,
@@ -248,6 +257,8 @@ Converter.prototype.presentInMilestone = function (str) {
   } else return 1;
 };
 
+
+//Convert text to number
 Converter.prototype.textToNumber = function (_str) {
   if (_str !== undefined) {
     this.numText = _str;
@@ -275,7 +286,7 @@ Converter.prototype.textToNumber = function (_str) {
         tempNum = this.presentInOnePlace(textArray[i - 1]);
         if (tempNum > 0) {
           finalNum += tempNum * 100 * factor;
-          //console.log(tempNum * 100 * factor);
+          // console.log(tempNum * 100 * factor);
           i -= 2;
         } else {
           finalNum += 100 * factor;
@@ -313,27 +324,30 @@ Converter.prototype.textToNumber = function (_str) {
   return finalNum;
 };
 
-Converter.prototype.ordinalToCardinal=function(_str){
-  var str=_str.slice(0,_str.length-2),num;
-  if(isNaN(parseInt(str)) || str.match(/[a-zA-z]/i)){
+//convert ordinal to cardinal
+Converter.prototype.ordinalToCardinal = function (_str) {
+  var str = _str.slice(0, _str.length - 2), num;
+  console.log(_str+"j");
+  if (isNaN(parseInt(str)) || str.match(/[a-zA-z]/i)) {
     return 'Illegal arguement';
-  }else{
-    num=parseInt(str);
+  } else {
+    num = parseInt(str);
   }
-  var text=this.numberToText(num);
-  convertedString=text.split(' ');
-  var lastWord=convertedString.pop();
-  lastWord=this.checkForOrdinal(lastWord);
+  var text = this.numberToText(num);
+  var convertedString = text.split(' ');
+  var lastWord = convertedString.pop();
+  lastWord = this.checkForOrdinal(lastWord);
   convertedString.push(lastWord);
-  var temp="";
-  for(var i=0;i<convertedString.length;i++){
-    temp+=convertedString[i]+' ';
+  var temp = '';
+  for (var i = 0; i < convertedString.length; i++) {
+    temp += convertedString[i] + ' ';
   }
-  temp=temp.trim();
-  return(temp);
-}
+  temp = temp.trim();
+  return (temp);
+};
 
 /* harmony default export */ __webpack_exports__["a"] = Converter;
+
 
 /***/ }),
 /* 1 */
@@ -347,6 +361,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 var converterObj = new __WEBPACK_IMPORTED_MODULE_0__converter_js__["a" /* default */]();
 converterObj.setAttr(0, '');
 
+//Class to handle all the processing of text.
 var Extractor = function () {
   this.text = '';
   this.convertedText = '';
@@ -356,10 +371,12 @@ var Extractor = function () {
   this.numberConverted = [];
 };
 
+//Set attribute of this.text.
 Extractor.prototype.setAttr = function (_str) {
   this.text = _str;
 };
 
+//Initialize everything
 Extractor.prototype.initialize = function () {
   this.text = '';
   this.convertedText = '';
@@ -369,6 +386,7 @@ Extractor.prototype.initialize = function () {
   this.numberConverted = [];
 };
 
+//Remove any newline space and tabs
 Extractor.prototype.cleanText = function (_str) {
   if (_str !== undefined) {
     if (typeof _str !== 'string') {
@@ -389,6 +407,8 @@ Extractor.prototype.cleanText = function (_str) {
   return this.textArray;
 };
 
+
+//Check if str is a number
 Extractor.prototype.isPresent = function (str, mode) {
   var i;
   if (str === '') {
@@ -419,6 +439,40 @@ Extractor.prototype.isPresent = function (str, mode) {
   return false;
 };
 
+//check if str is number
+Extractor.prototype.isNum=function(str){
+  var i,j;
+  for(i=0;i<str.length;i++){
+    if(isNaN(parseInt(str.charAt(i)))){
+      return false;
+    }
+  }
+  return true;
+}
+
+//check if str is ordinal
+Extractor.prototype.isOrdinal=function(str){
+  var i,j,temp='';
+  temp=str.charAt(str.length-2)+str.charAt(str.length-1);
+  if(temp!=='rd' && temp !=='th' && temp!=='nd' && temp!=='st'){
+    return false;
+  }
+  for(i=0;i<str.length-2;i++){
+    if(isNaN(parseInt(str[i]))){
+      // console.log(parseInt(str[i]));
+      return false;
+    }
+  }
+  return true;
+}
+
+/*
+* 0 - S to N
+* 1 - C to O
+* 2 - N to S
+* 3 - O to C
+*/
+
 Extractor.prototype.findNum = function () {
   this.textArray = this.cleanText();
   // console.log(this.textArray);
@@ -427,20 +481,36 @@ Extractor.prototype.findNum = function () {
     if (this.textArray[i] === '') {
       continue;
     }
+    if(this.isNum(this.textArray[i].trim())){
+      this.points.push(i);
+      this.points.push(i);
+      this.points.push(2);
+      continue;
+    }
+    if(this.isOrdinal(this.textArray[i].trim())){
+      this.points.push(i);
+      this.points.push(i);
+      this.points.push(3);
+      continue;
+    }
     str = converterObj.checkForCardinal(this.textArray[i]);
-    // console.log(str+' '+this.textArray[i]);
+    // console.log(j);
     if (str === this.textArray[i] && this.isPresent(this.textArray[i])) {
       j = i + 1;
+      //console.log(j);
       if (j === this.textArray.length) {
+        // console.log(i+"i");
         this.points.push(i);
         this.points.push(i);
         this.points.push(0);
       }
       while (j < this.textArray.length) {
         str = converterObj.checkForCardinal(this.textArray[j]);
+        // console.log(str);
         if (str === this.textArray[j] && this.isPresent(str)) {
           j++;
           if (j === this.textArray.length) {
+            // console.log(i+" "+j);
             this.points.push(i);
             this.points.push(j - 1);
             this.points.push(0);
@@ -449,7 +519,7 @@ Extractor.prototype.findNum = function () {
           continue;
         } else if (this.isPresent(str)) {
           // console.log('here');
-          str = this.textArray[j - 1];
+          str = this.textArray[j];
           if (converterObj.presentInOnePlace(str) === -1 && str !== 'ten') {
             this.points.push(i);
             this.points.push(j);
@@ -487,44 +557,100 @@ Extractor.prototype.findNum = function () {
   return this.numberFound;
 };
 
+//Conversion taking place here
 Extractor.prototype.toNumber = function () {
   var i, j;
+  // console.log(this.points);
   for (i = 0; i < this.points.length; i += 3) {
     var temp = '';
-    
-    this.textArray[this.points[i + 1]] = converterObj.checkForCardinal(this.textArray[this.points[i + 1]]);
-    for (j = this.points[i]; j <= this.points[i + 1]; j++) {
-      temp += this.textArray[j] + ' ';
+    var option=document.getElementsByName('textnum');
+    if(this.points[i+2]===2){
+      if(option[1].checked){
+        this.numberConverted.push(converterObj.numberToText(parseInt(this.textArray[this.points[i]])));
+      }else{
+        this.numberConverted.push(this.textArray[this.points[i]]);
+      }
+    }else if(this.points[i+2]===0){
+      temp='';
+      for(j=this.points[i];j<=this.points[i+1];j++){
+        temp+=this.textArray[j]+' ';
+      }
+      if(option[0].checked){
+        temp=temp.toLowerCase();
+        this.numberConverted.push(converterObj.textToNumber(temp.trim()));
+      }else{
+        this.numberConverted.push(temp.trim());
+      }
     }
-    temp=temp.toLowerCase();
-    this.numberConverted.push(converterObj.textToNumber(temp.trim()));
+    
+    option=document.getElementsByName('cardinalOrdinal');
+    if(this.points[i+2]===1){
+      this.textArray[this.points[i+1]]=converterObj.checkForCardinal(this.textArray[this.points[i+1]]);
+      for(j=this.points[i];j<=this.points[i+1];j++){
+        temp+=this.textArray[j]+' ';
+      }
+      if(option[0].checked){
+        temp=temp.toLowerCase();
+        this.numberConverted.push(converterObj.textToNumber(temp.trim()));  
+      }else{
+        this.numberConverted.push(temp.trim());
+      }
+    }else if(this.points[i+2]===3){
+      temp='';
+      temp+=this.textArray[this.points[i]];
+      temp=temp.toLowerCase();
+      
+      if(option[1].checked){
+        //console.log('change'+temp);
+        this.numberConverted.push(converterObj.ordinalToCardinal(temp.trim()));
+      }else{
+        this.numberConverted.push(temp.trim());
+      }
+    }
   }
   // console.log(this.numberConverted);
   return this.numberConverted;
 };
 
+//Find accurate suffix for ordinal and cardinal number
 Extractor.prototype.getOrdinalSuffix = function (num) {
-  var lsn = num % 10;
-  if (lsn === 1) {
-    return 'st';
-  } else if (lsn === 2) {
-    return 'nd';
-  } else if (lsn === 3) {
-    return 'rd';
-  } else return 'th';
+  var i,j,k;
+  if(typeof num === 'number'){
+    //  num=converterObj.numberToText(num);
+    var lsn = num % 10;
+    if (lsn === 1) {
+      return num+'st';
+    } else if (lsn === 2) {
+      return num+'nd';
+    } else if (lsn === 3) {
+      return num+'rd';
+    } else return num+'th';
+  }
+  var temp=num.split(' ');
+  //console.log(temp);
+  var s=temp.pop();
+  //console.log(temp);
+  temp.push(converterObj.checkForOrdinal(s));
+  var str='';
+  for(i=0;i<temp.length;i++){
+    str+=(temp[i]+' ');
+  }
+  return str.trim();
+  
 };
 
+//Replace in original text
 Extractor.prototype.replaceText = function () {
   var i, j, k;
   j = 0;
   k = 0;
   this.convertedText = '';
-  // console.log(this.points);
+  //console.log(this.numberConverted);
   for (i = 0; i < this.textArray.length;) {
     if (i === this.points[j]) {
       if (this.points[j + 2] === 1) {
         var suffix = this.getOrdinalSuffix(this.numberConverted[k]);
-        this.convertedText += (this.numberConverted[k] + suffix + ' ');
+        this.convertedText += (suffix + ' ');
       } else {
         this.convertedText += (this.numberConverted[k] + ' ');
       }
@@ -545,6 +671,7 @@ var extractor = new Extractor();
 Object.prototype.print = function () {
   console.log(this.valueOf());
 };
+
 
 window.startS2N = function () {
   var _str = document.getElementById('input1').value;
