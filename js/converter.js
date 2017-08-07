@@ -98,6 +98,9 @@ Converter.prototype.numberToText = function (_num) {
   // if(this.num===NaN || typeof this.num=='number'){
   //    return "Incorrect arguement";
   // }
+  if(this.num===0){
+    return 'zero';
+  }
   var temp = this.num,
     numArray = [],
     i;
@@ -241,6 +244,7 @@ Converter.prototype.textToNumber = function (_str) {
 
 Converter.prototype.ordinalToCardinal = function (_str) {
   var str = _str.slice(0, _str.length - 2), num;
+  console.log(_str+"j");
   if (isNaN(parseInt(str)) || str.match(/[a-zA-z]/i)) {
     return 'Illegal arguement';
   } else {
@@ -259,4 +263,4 @@ Converter.prototype.ordinalToCardinal = function (_str) {
   return (temp);
 };
 
-export default Converter;
+// export default Converter;

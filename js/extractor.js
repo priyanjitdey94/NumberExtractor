@@ -1,4 +1,4 @@
-import Converter from './converter.js';
+// import Converter from './converter.js';
 
 var converterObj = new Converter();
 converterObj.setAttr(0, '');
@@ -75,6 +75,38 @@ Extractor.prototype.isPresent = function (str, mode) {
   return false;
 };
 
+Extractor.prototype.isNum=function(str){
+  var i,j;
+  for(i=0;i<str.length;i++){
+    if(isNaN(parseInt(str.charAt(i)))){
+      return false;
+    }
+  }
+  return true;
+}
+
+Extractor.prototype.isOrdinal=function(str){
+  var i,j,temp='';
+  temp=str.charAt(str.length-2)+str.charAt(str.length-1);
+  if(temp!=='rd' && temp !=='th' && temp!=='nd' && temp!=='st'){
+    return false;
+  }
+  for(i=0;i<str.length-2;i++){
+    if(isNaN(parseInt(str[i]))){
+      console.log(parseInt(str[i]));
+      return false;
+    }
+  }
+  return true;
+}
+
+/*
+* 0 - S to N
+* 1 - C to O
+* 2 - N to S
+* 3 - O to C
+*/
+
 Extractor.prototype.findNum = function () {
   this.textArray = this.cleanText();
   // console.log(this.textArray);
@@ -83,20 +115,36 @@ Extractor.prototype.findNum = function () {
     if (this.textArray[i] === '') {
       continue;
     }
+    if(this.isNum(this.textArray[i].trim())){
+      this.points.push(i);
+      this.points.push(i);
+      this.points.push(2);
+      continue;
+    }
+    if(this.isOrdinal(this.textArray[i].trim())){
+      this.points.push(i);
+      this.points.push(i);
+      this.points.push(3);
+      continue;
+    }
     str = converterObj.checkForCardinal(this.textArray[i]);
-    // console.log(str+' '+this.textArray[i]);
+    // console.log(j);
     if (str === this.textArray[i] && this.isPresent(this.textArray[i])) {
       j = i + 1;
+      //console.log(j);
       if (j === this.textArray.length) {
+        // console.log(i+"i");
         this.points.push(i);
         this.points.push(i);
         this.points.push(0);
       }
       while (j < this.textArray.length) {
         str = converterObj.checkForCardinal(this.textArray[j]);
+        // console.log(str);
         if (str === this.textArray[j] && this.isPresent(str)) {
           j++;
           if (j === this.textArray.length) {
+            // console.log(i+" "+j);
             this.points.push(i);
             this.points.push(j - 1);
             this.points.push(0);
@@ -105,7 +153,7 @@ Extractor.prototype.findNum = function () {
           continue;
         } else if (this.isPresent(str)) {
           // console.log('here');
-          str = this.textArray[j - 1];
+          str = this.textArray[j];
           if (converterObj.presentInOnePlace(str) === -1 && str !== 'ten') {
             this.points.push(i);
             this.points.push(j);
@@ -145,29 +193,82 @@ Extractor.prototype.findNum = function () {
 
 Extractor.prototype.toNumber = function () {
   var i, j;
+  // console.log(this.points);
   for (i = 0; i < this.points.length; i += 3) {
     var temp = '';
-
-    this.textArray[this.points[i + 1]] = converterObj.checkForCardinal(this.textArray[this.points[i + 1]]);
-    for (j = this.points[i]; j <= this.points[i + 1]; j++) {
-      temp += this.textArray[j] + ' ';
+    var option=document.getElementsByName('textnum');
+    if(this.points[i+2]===2){
+      if(option[1].checked){
+        this.numberConverted.push(converterObj.numberToText(parseInt(this.textArray[this.points[i]])));
+      }else{
+        this.numberConverted.push(this.textArray[this.points[i]]);
+      }
+    }else if(this.points[i+2]===0){
+      temp='';
+      for(j=this.points[i];j<=this.points[i+1];j++){
+        temp+=this.textArray[j]+' ';
+      }
+      if(option[0].checked){
+        temp=temp.toLowerCase();
+        this.numberConverted.push(converterObj.textToNumber(temp.trim()));
+      }else{
+        this.numberConverted.push(temp.trim());
+      }
     }
-    temp = temp.toLowerCase();
-    this.numberConverted.push(converterObj.textToNumber(temp.trim()));
+    
+    option=document.getElementsByName('cardinalOrdinal');
+    if(this.points[i+2]===1){
+      this.textArray[this.points[i+1]]=converterObj.checkForCardinal(this.textArray[this.points[i+1]]);
+      for(j=this.points[i];j<=this.points[i+1];j++){
+        temp+=this.textArray[j]+' ';
+      }
+      if(option[0].checked){
+        temp=temp.toLowerCase();
+        this.numberConverted.push(converterObj.textToNumber(temp.trim()));  
+      }else{
+        this.numberConverted.push(temp.trim());
+      }
+    }else if(this.points[i+2]===3){
+      temp='';
+      temp+=this.textArray[this.points[i]];
+      temp=temp.toLowerCase();
+      
+      if(option[1].checked){
+        //console.log('change'+temp);
+        this.numberConverted.push(converterObj.ordinalToCardinal(temp.trim()));
+      }else{
+        this.numberConverted.push(temp.trim());
+      }
+    }
   }
   // console.log(this.numberConverted);
   return this.numberConverted;
 };
 
 Extractor.prototype.getOrdinalSuffix = function (num) {
-  var lsn = num % 10;
-  if (lsn === 1) {
-    return 'st';
-  } else if (lsn === 2) {
-    return 'nd';
-  } else if (lsn === 3) {
-    return 'rd';
-  } else return 'th';
+  var i,j,k;
+  if(typeof num === 'number'){
+    //  num=converterObj.numberToText(num);
+    var lsn = num % 10;
+    if (lsn === 1) {
+      return num+'st';
+    } else if (lsn === 2) {
+      return num+'nd';
+    } else if (lsn === 3) {
+      return num+'rd';
+    } else return num+'th';
+  }
+  var temp=num.split(' ');
+  //console.log(temp);
+  var s=temp.pop();
+  //console.log(temp);
+  temp.push(converterObj.checkForOrdinal(s));
+  var str='';
+  for(i=0;i<temp.length;i++){
+    str+=(temp[i]+' ');
+  }
+  return str.trim();
+  
 };
 
 Extractor.prototype.replaceText = function () {
@@ -175,12 +276,12 @@ Extractor.prototype.replaceText = function () {
   j = 0;
   k = 0;
   this.convertedText = '';
-  // console.log(this.points);
+  //console.log(this.numberConverted);
   for (i = 0; i < this.textArray.length;) {
     if (i === this.points[j]) {
       if (this.points[j + 2] === 1) {
         var suffix = this.getOrdinalSuffix(this.numberConverted[k]);
-        this.convertedText += (this.numberConverted[k] + suffix + ' ');
+        this.convertedText += (suffix + ' ');
       } else {
         this.convertedText += (this.numberConverted[k] + ' ');
       }
@@ -201,6 +302,7 @@ var extractor = new Extractor();
 Object.prototype.print = function () {
   console.log(this.valueOf());
 };
+
 
 window.startS2N = function () {
   var _str = document.getElementById('input1').value;
