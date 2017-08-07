@@ -6,6 +6,12 @@ var Converter = function () {
   this.tenPlace = ['', '', 'twenty', 'thirty', 'forty', 'fifty', 'sixty', 'seventy', 'eighty', 'ninety'];
   this.oneInTenPlace = ['ten', 'eleven', 'twelve', 'thirteen', 'fourteen', 'fifteen', 'sixteen', 'seventeen', 'eighteen', 'nineteen'];
   this.mileStone = ['', 'thousand', 'million', 'billion', 'hundred'];
+  this.cOnePlace = ['', 'first', 'second', 'third', 'fourth', 'fifth', 'sixth', 'seventh', 'eigth', 'ninth'];
+  this.cOneInTenPlace = ['tenth', 'eleventh', 'twelveth', 'thirteenth', 'fourteenth', 'fifteenth', 'sixteenth',
+    'seventeenth', 'eighteenth', 'nineteenth'];
+  this.cTenPlace = ['', '', 'twentieth', 'thirteeth', 'fortieth', 'fiftieth', 'sixtieth', 'seventieth',
+    'eightieth', 'ninetieth'];
+  this.cMileStone = ['', 'thousandth', 'millionth', 'billionth', 'hundredth'];
 };
 
 Converter.prototype.setAttr = function (_num, _numText) {
@@ -14,6 +20,55 @@ Converter.prototype.setAttr = function (_num, _numText) {
   }
   if (_numText !== undefined) {
     this.numText = _numText;
+  }
+};
+
+Converter.prototype.checkForCardinal = function (str) {
+  var i, j, k;
+  for (i = 0; i < this.cOnePlace.length; i++) {
+    if (str === this.cOnePlace[i]) {
+      return this.onePlace[i];
+    }
+  }
+  for (i = 0; i < this.cTenPlace.length; i++) {
+    if (str === this.cTenPlace[i]) {
+      return this.tenPlace[i];
+    }
+  }
+  for (i = 0; i < this.cOneInTenPlace.length; i++) {
+    if (str === this.cOneInTenPlace[i]) {
+      return this.oneInTenPlace[i];
+    }
+  }
+  for (i = 0; i < this.cMileStone.length; i++) {
+    if (str === this.cMileStone[i]) {
+      return this.mileStone[i];
+    }
+  }
+  return str;
+};
+
+Converter.prototype.checkForOrdinal = function (str) {
+  var i, j, k;
+  for (i = 0; i < this.onePlace.length; i++) {
+    if (str === this.onePlace[i]) {
+      return this.cOnePlace[i];
+    }
+  }
+  for (i = 0; i < this.tenPlace.length; i++) {
+    if (str === this.tenPlace[i]) {
+      return this.cTenPlace[i];
+    }
+  }
+  for (i = 0; i < this.oneInTenPlace.length; i++) {
+    if (str === this.oneInTenPlace[i]) {
+      return this.cOneInTenPlace[i];
+    }
+  }
+  for (i = 0; i < this.mileStone.length; i++) {
+    if (str === this.mileStone[i]) {
+      return this.cMileStone[i];
+    }
   }
 };
 
@@ -43,6 +98,9 @@ Converter.prototype.numberToText = function (_num) {
   // if(this.num===NaN || typeof this.num=='number'){
   //    return "Incorrect arguement";
   // }
+  if(this.num===0){
+    return 'zero';
+  }
   var temp = this.num,
     numArray = [],
     i;
@@ -69,7 +127,7 @@ Converter.prototype.numberToText = function (_num) {
   for (i = str.length - 1; i >= 0; i--) {
     finalStr += str[i] + ' ';
   }
-  document.getElementById('answer').innerHTML = finalStr;
+  // document.getElementById('answer').innerHTML = finalStr;
   return finalStr.trim();
 };
 
@@ -146,7 +204,7 @@ Converter.prototype.textToNumber = function (_str) {
         tempNum = this.presentInOnePlace(textArray[i - 1]);
         if (tempNum > 0) {
           finalNum += tempNum * 100 * factor;
-          //console.log(tempNum * 100 * factor);
+          // console.log(tempNum * 100 * factor);
           i -= 2;
         } else {
           finalNum += 100 * factor;
@@ -184,11 +242,25 @@ Converter.prototype.textToNumber = function (_str) {
   return finalNum;
 };
 
-var converterObj = new Converter();
-converterObj.setAttr(0, '');
-
-var startN2S = function () {
-  var _num = document.getElementById('uInput1').value;
-  converterObj.setAttr(parseInt(_num));
-  converterObj.numberToText();
+Converter.prototype.ordinalToCardinal = function (_str) {
+  var str = _str.slice(0, _str.length - 2), num;
+  console.log(_str+"j");
+  if (isNaN(parseInt(str)) || str.match(/[a-zA-z]/i)) {
+    return 'Illegal arguement';
+  } else {
+    num = parseInt(str);
+  }
+  var text = this.numberToText(num);
+  convertedString = text.split(' ');
+  var lastWord = convertedString.pop();
+  lastWord = this.checkForOrdinal(lastWord);
+  convertedString.push(lastWord);
+  var temp = '';
+  for (var i = 0; i < convertedString.length; i++) {
+    temp += convertedString[i] + ' ';
+  }
+  temp = temp.trim();
+  return (temp);
 };
+
+// export default Converter;
